@@ -22,11 +22,18 @@ function addTwo(el) {
   return (el + 2);
 }
 
-console.log([1,2,3].myMap(addTwo));
+// console.log([1,2,3].myMap(addTwo));
 
+Array.prototype.myReduce = function(callback_function, initial_value = this.shift()) {
+  let acc = initial_value;
+  this.myEach (el => {
+    acc = callback_function(acc, el);
+  });
+  return acc;
+};
 
-// Array.prototype.myEach222 = function(addTwo) {
-//   for (let i = 0; i < this.length; i++) {
-//     results.push(addTwo(this[i]));
-//   }
-// };
+function sumTogether(acc, el) {
+  return acc + el;
+}
+
+console.log([1, 2, 3].myReduce(sumTogether));
